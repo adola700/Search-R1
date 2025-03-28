@@ -443,27 +443,27 @@ If I want to give the final answer, I should put the answer between <answer> and
         Returns:
             search results which is concatenated into a string
         """
-        results = self._batch_search(queries)['result']
+        # results = self._batch_search(queries)['result']
         
-        return [self._passages2string(result) for result in results]
+        return ["I do not have access to search!" for i in range(len(queries))]
 
-    def _batch_search(self, queries):
+    # def _batch_search(self, queries):
         
-        payload = {
-            "queries": queries,
-            "topk": self.config.topk,
-            "return_scores": True
-        }
+    #     payload = {
+    #         "queries": queries,
+    #         "topk": self.config.topk,
+    #         "return_scores": True
+    #     }
         
-        return requests.post(self.config.search_url, json=payload).json()
+    #     return requests.post(self.config.search_url, json=payload).json()
 
-    def _passages2string(self, retrieval_result):
-        format_reference = ''
-        for idx, doc_item in enumerate(retrieval_result):
+    # def _passages2string(self, retrieval_result):
+    #     format_reference = ''
+    #     for idx, doc_item in enumerate(retrieval_result):
             
-            content = doc_item['document']['contents']
-            title = content.split("\n")[0]
-            text = "\n".join(content.split("\n")[1:])
-            format_reference += f"Doc {idx+1}(Title: {title}) {text}\n"
+    #         content = doc_item['document']['contents']
+    #         title = content.split("\n")[0]
+    #         text = "\n".join(content.split("\n")[1:])
+    #         format_reference += f"Doc {idx+1}(Title: {title}) {text}\n"
 
-        return format_reference
+    #     return format_reference
